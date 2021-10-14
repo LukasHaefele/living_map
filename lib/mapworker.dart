@@ -31,8 +31,9 @@ List<MapImg> allMaps = get_maps();
 void createMap(
     String name, String map, String user, WebSocketChannel wsc) async {
   String src = await saveMapImg(map);
-  MapImg newMap = MapImg(name, user, src, getMapId());
-  wsc.sink.add('map_add; name: $name; src: $src');
+  int id = getMapId();
+  MapImg newMap = MapImg(name, user, src, id);
+  wsc.sink.add('map_add; name: $name; src: $src; id: $id');
   allMaps.add(newMap);
   saveMaps();
 }
@@ -44,8 +45,10 @@ int getMapId() {
 Future<String> saveMapImg(String map) async {
   Uint8List bitlist = base64Decode(parseImage(map));
   Image img = decodeImage(bitlist) as Image;
-  String newname = allMaps.length.toString();
-  await File('web/img/maps/$newname.png').writeAsBytes(encodePng(img));
+  String newname = (allMaps[allMaps.length - 1].id + 1).toString();
+  File newFile = File('web/img/maps/$newname.png');
+  await newFile.create();
+  await newFile.writeAsBytes(encodePng(img));
   String r = 'img/maps/$newname.png';
   return r;
 }
@@ -58,6 +61,8 @@ List<MapImg> get_maps() {
   String s = file.readAsStringSync();
   if (s.isNotEmpty) {
     st = jsonDecode(s);
+  } else {
+    r.add(MapImg('none', 'none', 'none', -1));
   }
 
   for (int i = 0; i < st.length; i++) {
@@ -83,7 +88,8 @@ void getMapsForUser(String username, WebSocketChannel wsc) {
     if (allMaps[i].owner == username) {
       String name = allMaps[i].name;
       String src = allMaps[i].src;
-      wsc.sink.add('map_add; name: $name; src: $src');
+      int id = allMaps[i].id;
+      wsc.sink.add('map_add; name: $name; src: $src; id: $id');
     }
   }
 }

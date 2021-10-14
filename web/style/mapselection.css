@@ -16,6 +16,8 @@
   background-size: cover;
   justify-content: center;
   align-items: center;
+  text-shadow: -1px -1px 0 #fff, 1px -1px #fff, -1px 1px #fff, 1px 1px #fff;
+  font-size: larger;
 }
 .mapSelection #mapAdd {
   background-color: rgba(0, 0, 0, 0.35);
