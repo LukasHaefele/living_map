@@ -10,35 +10,42 @@ class MapImg {
   late String name;
   late String owner;
   late String src;
+  late int id;
 
-  MapImg(this.name, this.owner, this.src);
+  MapImg(this.name, this.owner, this.src, this.id);
 
   Map toJson() {
-    var r = {'name': name, 'owner': owner, 'src': src};
+    var r = {'name': name, 'owner': owner, 'src': src, 'id': id};
     return r;
   }
 }
 
 MapImg mapFromJson(Map mapImg) {
-  MapImg r = MapImg(mapImg['name'], mapImg['owner'], mapImg['src']);
+  MapImg r =
+      MapImg(mapImg['name'], mapImg['owner'], mapImg['src'], mapImg['id']);
   return r;
 }
 
 List<MapImg> allMaps = get_maps();
 
-void createMap(String name, String map, String user, WebSocketChannel wsc) {
-  String src = saveMapImg(map);
-  MapImg newMap = MapImg(name, user, src);
+void createMap(
+    String name, String map, String user, WebSocketChannel wsc) async {
+  String src = await saveMapImg(map);
+  MapImg newMap = MapImg(name, user, src, getMapId());
   wsc.sink.add('map_add; name: $name; src: $src');
   allMaps.add(newMap);
   saveMaps();
 }
 
-String saveMapImg(String map) {
+int getMapId() {
+  return allMaps[allMaps.length - 1].id + 1;
+}
+
+Future<String> saveMapImg(String map) async {
   Uint8List bitlist = base64Decode(parseImage(map));
   Image img = decodeImage(bitlist) as Image;
   String newname = allMaps.length.toString();
-  File('web/img/maps/$newname.png').writeAsBytesSync(encodePng(img));
+  await File('web/img/maps/$newname.png').writeAsBytes(encodePng(img));
   String r = 'img/maps/$newname.png';
   return r;
 }

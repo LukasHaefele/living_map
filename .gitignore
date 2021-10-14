@@ -17,3 +17,6 @@ web/img/profilePics/*
 !web/img/maps/.gitkeep
 !web/img/profilePics/.gitkeep
 
+#unnecessaries
+
+.vscode/

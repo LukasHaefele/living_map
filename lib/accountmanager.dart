@@ -121,11 +121,11 @@ Map tokenLog(String token, WebSocketChannel wsc) {
   return m;
 }
 
-Map change_profle_picture(String username, String image) {
+Future<Map> change_profle_picture(String username, String image) async {
   Map m = {'bool': true};
   Uint8List bitlist = base64Decode(parseImage(image));
   Image img = copyResizeCropSquare(decodeImage(bitlist) as Image, 125);
-  File('web/img/profilePics/$username.png').writeAsBytesSync(encodePng(img));
+  await File('web/img/profilePics/$username.png').writeAsBytes(encodePng(img));
   m['src'] = 'img/profilePics/$username.png';
   update_user(username, 'img/profilePics/$username.png');
 

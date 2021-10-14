@@ -34,7 +34,7 @@ Map<String, dynamic> parseData(String data) {
   return r;
 }
 
-dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) {
+dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) async {
   String action = request['action'];
   if (request['action'] != PROFILE_PICTURE && request['action'] != MAP_UPLOAD) {
     print(request);
@@ -77,7 +77,7 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) {
       return;
 
     case PROFILE_PICTURE:
-      Map m = change_profle_picture(request['username'], request['pic']);
+      Map m = await change_profle_picture(request['username'], request['pic']);
       if (m['bool']) {
         wsc.sink.add('profile_picture; src: ' + m['src']);
       } else {
@@ -92,6 +92,9 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) {
 
     case MAP_GET_ALL:
       getMapsForUser(request['username'], wsc);
+      return;
+
+    case MAP_SELECT:
       return;
   }
   print('Warning: unhandeled action');
