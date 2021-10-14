@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    background-color: #767b91;
+    box-shadow: 4px 4px 10px;
+    #accountbutton{
+        display: flex;
+        width: 45px;
+        height: 45px;
+        border-radius: 30%;
+        background-color: #50576e;
+        border: 2px solid black;
+        margin: 2px 2px 2px auto;
+        p{
+            margin: auto;
+        }
+    }
+    #account{
+        height: 45px;
+        margin: auto 10px auto 5px;
+        display: none;
+        align-items: center;
+    }
+    #profilePicture{
+        display: none;
+        height: 45px;
+        width: 45px;
+        margin: 2px 5px 2px auto;
+        border: 2px solid black;
+        border-radius: 30%;
+    }
+}

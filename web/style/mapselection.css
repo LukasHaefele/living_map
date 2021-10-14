@@ -1,0 +1,24 @@
+.mapSelection {
+  display: none;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.mapSelection .map {
+  display: flex;
+  height: 75px;
+  width: 175px;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 20px;
+  box-shadow: 2px 2px 10px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
+.mapSelection #mapAdd {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+/*# sourceMappingURL=mapselection.css.map */

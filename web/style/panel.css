@@ -1,0 +1,116 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  background-color: #3a3f4d;
+  margin: auto auto auto auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+}
+.panel #sort {
+  display: flex;
+}
+.panel #sort div {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.panel #sort div input {
+  margin: auto;
+  background-color: #50576e;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.panel button {
+  margin: 5px auto 5px auto;
+  width: 100px;
+  background-color: #50576e;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.panel #frow {
+  display: flex;
+  flex-direction: row;
+}
+.panel #frow #uploadProfilePic {
+  margin-left: 5px;
+}
+.panel #frow .fileUpload {
+  margin: 5px 5px 5px auto;
+}
+.panel #frow #mapName {
+  width: 100%;
+  margin: 5px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.288);
+}
+.panel .closeButton {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-right: 5px;
+  width: 21px;
+  height: 21px;
+}
+.panel .imgUpload {
+  display: none;
+}
+.panel .fileUpload {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(0, 0, 0, 0.288);
+  border-radius: 5px;
+}
+.panel #preview {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border: 2px solid rgba(0, 0, 0, 0.288);
+  background-color: #1a1c22;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.panel #mapPreview {
+  width: 600px;
+  height: 500px;
+  margin: auto;
+  border: 2px solid rgba(0, 0, 0, 0.288);
+  background-color: #1a1c22;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.greyout {
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#loginpanel {
+  display: none;
+}
+
+#registerpanel {
+  display: none;
+}
+
+#picturepanel {
+  display: none;
+}
+
+#picturePanel {
+  display: none;
+}
+
+#mapUpload {
+  display: none;
+}
+
+/*# sourceMappingURL=panel.css.map */

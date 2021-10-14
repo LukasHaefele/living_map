@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
+        <title>Living Map</title>
+        <link rel="stylesheet" href="style/style.css">
+        <script defer src="main.dart.js"></script>
+        <script src="https://kit.fontawesome.com/a3de05bb60.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="header">
+            <button id="profilePicture"></button>
+            <p id="account"></p>
+            <button id="accountbutton"><p></p></button>
+        </div>
+
+        <div class="greyout">
+            <div class="panel" id="mapUpload">
+                <div id="frow">
+                    <input type="text" id="mapName" placeholder="name of the map">
+                    <button class="closeButton" id="closeButtonMap">X</button>
+                </div>
+                <img id="mapPreview">
+                <div id="frow">
+                    <label class="fileUpload" id="fileUploadMap">
+                        Open File
+                        <input class="imgUpload" id="imgUploadMap" type="file" accept="image/*">
+                    </label>
+                    <button id="uploadMap">Upload</button>
+                </div>
+            </div>
+            <div class="panel" id="picturepanel">
+                <button class="closeButton" id="closeButton">X</button>
+                <img id="preview"></img>
+                <div id="frow">
+                    <label class="fileUpload" id="fileUpload">
+                        Open File
+                        <input class="imgUpload" id="imgUpload" type="file" accept="image/*">
+                    </label>
+                    <button id="uploadProfilePic">Upload</button>
+                </div>
+            </div>
+            <div class="panel" id="loginpanel">
+                <div id='sort'>
+                    <div>
+                        <p>Username: </p>
+                        <p>Password: </p>
+                    </div>
+                    <div>
+                        <input type="text" id="username">
+                        <input type="password" id="password">
+                    </div>
+                </div>
+
+                <button id="login">login</button>
+                <button id="registerp">register</button>
+            </div>
+            <div class="panel" id="registerpanel">
+                <div id="sort">
+                    <div>
+                        <p>Username:        </p>
+                        <p>e-Mail:          </p>
+                        <p>Password:        </p>
+                        <p>Repeat Password  </p>
+                    </div>
+                    <div>
+                        <input type="text" id="usernamer">
+                        <input type="email" id="email">
+                        <input type="password" id="pass1">
+                        <input type="password" id="pass2">
+                    </div>
+                </div>
+                <button id="register">register</button>
+            </div>
+        </div>
+
+        <div id="error">
+        </div>
+
+        <div class="welcomePage"></div>
+
+        <div class="mapSelection">
+            <button class="map" id="mapAdd">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        
+        <div class="board"></div>
+    </body>
+</html>

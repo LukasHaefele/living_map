@@ -1,0 +1,16 @@
+@import './header.scss';
+@import './panel.scss';
+@import './error.scss';
+@import './board.scss';
+@import './mapselection.scss';
+
+html, body{
+    display: flex;
+    flex-direction: column;
+    background-color: #50576e;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
