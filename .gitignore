@@ -6,8 +6,14 @@
 build/
 
 # Specific Data
-.data/map.json
-.data/user.json
+.data/*
 
-web/img/maps/
-web/img/profilePics/
+web/img/maps/*
+web/img/profilePics/*
+
+#exception rule
+!.data/.gitkeep
+
+!web/img/maps/.gitkeep
+!web/img/profilePics/.gitkeep
+
