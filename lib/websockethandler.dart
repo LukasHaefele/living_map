@@ -14,6 +14,8 @@ void onConnect(WebSocketChannel wsc) {
     //wsc.sink.add('penis');
     //print(data);
     getAction(parseData(data), wsc);
+  }, onDone: () {
+    print('connection closed');
   });
 }
 
