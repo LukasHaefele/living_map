@@ -58,8 +58,22 @@ void loggedIn(String username, ClientWebSocket ws) {
   querySelector('#accountbutton')?.remove();
   querySelector('#account')
     ?..text = username
-    ..style.display = 'flex';
+    ..style.display = 'flex'
+    ..onMouseOver.listen((event) {
+      querySelector('#account')?.text = 'logout';
+    })
+    ..onMouseLeave.listen((event) {
+      querySelector('#account')?.text = username;
+    })
+    ..onClick.listen((event) {
+      logout();
+    });
   initMapSelection(ws);
+}
+
+void logout() {
+  invalidate();
+  window.location.reload();
 }
 
 void isLoggedIn(ClientWebSocket ws) {
