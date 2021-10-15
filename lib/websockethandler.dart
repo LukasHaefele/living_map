@@ -79,13 +79,7 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) async {
       return;
 
     case PROFILE_PICTURE:
-      Map m = await change_profle_picture(request['username'], request['pic']);
-      if (m['bool']) {
-        wsc.sink.add('profile_picture; src: ' + m['src']);
-      } else {
-        wsc.sink.add('profile_picture_failure');
-        print('profile_pictuer_failure');
-      }
+      changeProflePicture(request['username'], request['pic'], wsc);
       return;
 
     case MAP_UPLOAD:

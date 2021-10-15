@@ -15,7 +15,7 @@ web/img/profilePics/*
 !.data/.gitkeep
 
 !web/img/maps/.gitkeep
-!web/img/profilePics/.gitkeep
+!web/img/profilePics/blank.png
 
 #unnecessaries
 
