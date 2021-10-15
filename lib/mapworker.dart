@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:living_map/accountmanager.dart';
+import 'package:living_map/token.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MapImg {
@@ -11,18 +12,30 @@ class MapImg {
   late String owner;
   late String src;
   late int id;
+  late List<Token> tokens;
 
-  MapImg(this.name, this.owner, this.src, this.id);
+  MapImg(this.name, this.owner, this.src, this.id, this.tokens);
 
   Map toJson() {
-    var r = {'name': name, 'owner': owner, 'src': src, 'id': id};
+    List<Map> t = [];
+    tokens.forEach((element) {
+      t.add(element.toJson());
+    });
+
+    var r = {'name': name, 'owner': owner, 'src': src, 'id': id, 'tokens': t};
     return r;
   }
 }
 
 MapImg mapFromJson(Map mapImg) {
-  MapImg r =
-      MapImg(mapImg['name'], mapImg['owner'], mapImg['src'], mapImg['id']);
+  List<Map> t = mapImg['tokens'];
+  List<Token> tokens = [];
+  t.forEach((element) {
+    tokens.add(tokenFromJson(element));
+  });
+
+  MapImg r = MapImg(
+      mapImg['name'], mapImg['owner'], mapImg['src'], mapImg['id'], tokens);
   return r;
 }
 
@@ -32,7 +45,7 @@ void createMap(
     String name, String map, String user, WebSocketChannel wsc) async {
   String src = await saveMapImg(map);
   int id = getMapId();
-  MapImg newMap = MapImg(name, user, src, id);
+  MapImg newMap = MapImg(name, user, src, id, []);
   wsc.sink.add('map_add; name: $name; src: $src; id: $id');
   allMaps.add(newMap);
   saveMaps();
@@ -62,7 +75,7 @@ List<MapImg> get_maps() {
   if (s.isNotEmpty) {
     st = jsonDecode(s);
   } else {
-    r.add(MapImg('none', 'none', 'none', -1));
+    r.add(MapImg('none', 'none', 'none', -1, []));
   }
 
   for (int i = 0; i < st.length; i++) {
@@ -92,4 +105,8 @@ void getMapsForUser(String username, WebSocketChannel wsc) {
       wsc.sink.add('map_add; name: $name; src: $src; id: $id');
     }
   }
+}
+
+void initMap(WebSocketChannel wsc, int id) {
+  wsc.sink.add('map_initialize; src: img/maps/$id.png; tokens:');
 }

@@ -91,6 +91,8 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) async {
       return;
 
     case MAP_SELECT:
+      String id = request['id'];
+      initMap(wsc, int.parse(id));
       return;
   }
   print('Warning: unhandeled action');

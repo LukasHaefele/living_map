@@ -21,3 +21,4 @@ const MAP_UPLOAD = 'map_upload';
 const MAP_GET_ALL = 'map_get_all';
 const MAP_ADD = 'map_add';
 const MAP_SELECT = 'map_select';
+const MAP_INITIALIZE = 'map_initialize';
