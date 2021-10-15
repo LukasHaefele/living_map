@@ -8,11 +8,11 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:image/image.dart';
 //import 'package:flutter/widgets.dart';
 
-List<User> allUsers = get_users();
+List<User> allUsers = getUsers();
 
 bool createAccount(
     String username, String password, String email, WebSocketChannel wsc) {
-  if (!is_taken(username, email)) {
+  if (!isTaken(username, email)) {
     String token = getRandomString(8);
     while (tokenIsTaken(token)) {
       token = getRandomString(8);
@@ -51,7 +51,7 @@ Random _rnd = Random();
 String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
     length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-List<User> get_users() {
+List<User> getUsers() {
   List<User> r = [];
   List<dynamic> st = [];
 
@@ -79,7 +79,7 @@ void saveUsers() {
   file.writeAsString(s);
 }
 
-bool is_taken(String username, email) {
+bool isTaken(String username, email) {
   for (int i = 0; i < allUsers.length; i++) {
     //allUsers[i].decrypt();
     if (username == allUsers[i].username || email == allUsers[i].email) {
@@ -128,7 +128,7 @@ void changeProflePicture(
   File newFile = File('web/img/profilePics/$username.png');
   await newFile.create();
   await newFile.writeAsBytes(encodePng(img), flush: true);
-  update_user(username, 'img/profilePics/$username.png');
+  updateUser(username, 'img/profilePics/$username.png');
 
   saveUsers();
   wsc.sink.add('profile_picture; src: img/profilePics/$username.png');
@@ -140,7 +140,7 @@ String parseImage(String str) {
   return r;
 }
 
-void update_user(String username, String src) {
+void updateUser(String username, String src) {
   for (int i = 0; i < allUsers.length; i++) {
     if (allUsers[i].username == username) {
       allUsers[i].profilePicture = src;

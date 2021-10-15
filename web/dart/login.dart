@@ -1,6 +1,6 @@
 import 'dart:html';
-import 'package:living_map/user.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+//import 'package:living_map/user.dart';
+//import 'package:web_socket_channel/web_socket_channel.dart';
 
 import 'file_picker.dart';
 import 'map_selection.dart';

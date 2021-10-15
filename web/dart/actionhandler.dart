@@ -1,9 +1,9 @@
 import 'dart:html';
 
 import 'package:living_map/actions.dart';
-import 'package:living_map/user.dart';
+//import 'package:living_map/user.dart';
 
-import 'header.dart';
+//import 'header.dart';
 import 'login.dart';
 import 'map_selection.dart';
 import 'panel.dart';

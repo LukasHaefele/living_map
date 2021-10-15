@@ -1,4 +1,5 @@
 class Token {
+  late int id;
   late String type;
   late String name;
   late String info;
@@ -17,6 +18,7 @@ class Token {
   late Map<int, int> position;
 
   Token(
+      this.id,
       this.type,
       this.name,
       this.info,
@@ -34,6 +36,7 @@ class Token {
 
   Map toJson() {
     Map m = {
+      'id': id,
       'type': type,
       'name': name,
       'info': info,
@@ -55,6 +58,7 @@ class Token {
 
 Token tokenFromJson(Map token) {
   return Token(
+      token['id'],
       token['type'],
       token['name'],
       token['info'],
@@ -69,4 +73,12 @@ Token tokenFromJson(Map token) {
       token['intelligence'],
       token['warState'],
       token['position']);
+}
+
+List<Token> allTokens = getTokens();
+
+List<Token> getTokens() {
+  List<Token> l = [];
+
+  return l;
 }

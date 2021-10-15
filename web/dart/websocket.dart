@@ -1,12 +1,12 @@
-import 'package:living_map/actions.dart';
-import 'package:web_socket_channel/html.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart';
+//import 'package:living_map/actions.dart';
+//import 'package:web_socket_channel/html.dart';
+//import 'package:web_socket_channel/web_socket_channel.dart';
+//import 'package:web_socket_channel/status.dart';
 
 import 'dart:html';
 
 import 'actionhandler.dart';
-import 'login.dart';
+//import 'login.dart';
 
 class ClientWebSocket {
   final WebSocket _webSocket = WebSocket('ws://localhost:7070/ws');
@@ -29,7 +29,7 @@ class ClientWebSocket {
 ClientWebSocket ws = ClientWebSocket();
 
 Map<String, dynamic> parseData(String data) {
-  Map<String, dynamic> r = new Map();
+  Map<String, dynamic> r = {};
 
   List<String> split;
   split = data.split('; ');

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const ACCOUNT_LOGIN = 'account_login';
 const ACCOUNT_REGISTER = 'account_register';
 

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:living_map/accountmanager.dart';
-import 'package:living_map/token.dart';
+//import 'package:living_map/token.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MapImg {
@@ -12,34 +12,29 @@ class MapImg {
   late String owner;
   late String src;
   late int id;
-  late List<Token> tokens;
+  late List tokens;
 
   MapImg(this.name, this.owner, this.src, this.id, this.tokens);
 
   Map toJson() {
-    List<Map> t = [];
-    tokens.forEach((element) {
-      t.add(element.toJson());
-    });
-
-    var r = {'name': name, 'owner': owner, 'src': src, 'id': id, 'tokens': t};
+    var r = {
+      'name': name,
+      'owner': owner,
+      'src': src,
+      'id': id,
+      'tokens': tokens
+    };
     return r;
   }
 }
 
 MapImg mapFromJson(Map mapImg) {
-  List<Map> t = mapImg['tokens'];
-  List<Token> tokens = [];
-  t.forEach((element) {
-    tokens.add(tokenFromJson(element));
-  });
-
-  MapImg r = MapImg(
-      mapImg['name'], mapImg['owner'], mapImg['src'], mapImg['id'], tokens);
+  MapImg r = MapImg(mapImg['name'], mapImg['owner'], mapImg['src'],
+      mapImg['id'], mapImg['tokens']);
   return r;
 }
 
-List<MapImg> allMaps = get_maps();
+List<MapImg> allMaps = getMaps();
 
 void createMap(
     String name, String map, String user, WebSocketChannel wsc) async {
@@ -66,7 +61,7 @@ Future<String> saveMapImg(String map) async {
   return r;
 }
 
-List<MapImg> get_maps() {
+List<MapImg> getMaps() {
   List<MapImg> r = [];
   List<dynamic> st = [];
 
@@ -107,6 +102,4 @@ void getMapsForUser(String username, WebSocketChannel wsc) {
   }
 }
 
-void initMap(WebSocketChannel wsc, int id) {
-  wsc.sink.add('map_initialize; src: img/maps/$id.png; tokens:');
-}
+void initMap(WebSocketChannel wsc, int id) {}
