@@ -100,7 +100,8 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) async {
       return;
 
     case GAME_TOKEN_CREATE:
-      mapAddToken(request['id'], createToken(jsonDecode(request['token'])));
+      mapAddToken(
+          request['id'], createToken(jsonDecode(request['token']), wsc));
       return;
   }
   print('Warning: unhandeled action');

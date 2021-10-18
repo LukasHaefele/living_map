@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 class Token {
   late int id;
   late String type;
@@ -80,7 +82,7 @@ Token tokenFromJson(Map token) {
 
 List<Token> allTokens = getTokens();
 
-int createToken(Map token) {
+int createToken(Map token, WebSocketChannel wsc) {
   Token newToken = Token(
       token['id'],
       token['type'],
@@ -99,6 +101,7 @@ int createToken(Map token) {
       token['position']);
   allTokens.add(newToken);
   saveTokens();
+  sendToken(newToken, wsc);
   return token['id'];
 }
 
@@ -125,4 +128,18 @@ List<Token> getTokens() {
   }
 
   return to;
+}
+
+Token? getTokenById(int id) {
+  for (var element in allTokens) {
+    if (element.id == id) {
+      return element;
+    }
+  }
+  return null;
+}
+
+void sendToken(Token t, WebSocketChannel wsc) {
+  String s = jsonEncode(t.toJson());
+  wsc.sink.add('game_token_add; token: $s');
 }

@@ -6,6 +6,7 @@ import 'package:living_map/actions.dart';
 //import 'header.dart';
 import 'login.dart';
 import 'map_selection.dart';
+import 'mapaction.dart';
 import 'panel.dart';
 import 'websocket.dart';
 
@@ -55,6 +56,14 @@ dynamic getaction(Map request, ClientWebSocket ws) {
 
     case ERROR:
       error(request['message']);
+      return;
+
+    case MAP_INITIALIZE:
+      initMap(request['src']);
+      return;
+
+    case GAME_TOKEN_ADD:
+      addTokenToMap(request['token']);
       return;
   }
   window.console.warn('unhandeled action ' + request['action']);

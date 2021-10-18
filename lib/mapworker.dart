@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:living_map/accountmanager.dart';
+import 'package:living_map/token.dart';
 //import 'package:living_map/token.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -123,4 +124,9 @@ void initMap(WebSocketChannel wsc, int id) {
     return;
   }
   MapImg current = checkMap;
+  String src = current.src;
+  wsc.sink.add('map_initialize; src: $src');
+  for (var element in current.tokens) {
+    sendToken(getTokenById(element)!, wsc);
+  }
 }

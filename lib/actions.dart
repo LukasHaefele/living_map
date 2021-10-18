@@ -28,3 +28,4 @@ const MAP_INITIALIZE = 'map_initialize';
 const ERROR = 'error';
 
 const GAME_TOKEN_CREATE = 'game_token_create';
+const GAME_TOKEN_ADD = 'game_token_add';
