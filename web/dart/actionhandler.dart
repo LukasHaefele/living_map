@@ -52,6 +52,10 @@ dynamic getaction(Map request, ClientWebSocket ws) {
     case MAP_ADD:
       addMap(request['name'], request['src'], int.parse(request['id']), ws);
       return;
+
+    case ERROR:
+      error(request['message']);
+      return;
   }
   window.console.warn('unhandeled action ' + request['action']);
   //print(request);

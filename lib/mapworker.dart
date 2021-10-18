@@ -102,4 +102,25 @@ void getMapsForUser(String username, WebSocketChannel wsc) {
   }
 }
 
-void initMap(WebSocketChannel wsc, int id) {}
+MapImg? getMapById(int id) {
+  for (var element in allMaps) {
+    if (element.id == id) {
+      return element;
+    }
+  }
+  return null;
+}
+
+void mapAddToken(int map, int id) {
+  getMapById(map)!.tokens.add(id);
+}
+
+void initMap(WebSocketChannel wsc, int id) {
+  MapImg? checkMap = getMapById(id);
+  if (checkMap == null) {
+    print('Error: map with id: $id doesn\'t exist');
+    wsc.sink.add('error; msg: map with id: $id doesn\'exist');
+    return;
+  }
+  MapImg current = checkMap;
+}

@@ -1,7 +1,11 @@
 //import 'dart:convert';
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:living_map/accountmanager.dart';
 import 'package:living_map/mapworker.dart';
+import 'package:living_map/token.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 //import 'package:shelf/shelf.dart';
 import 'actions.dart';
@@ -93,6 +97,10 @@ dynamic getAction(Map<String, dynamic> request, WebSocketChannel wsc) async {
     case MAP_SELECT:
       String id = request['id'];
       initMap(wsc, int.parse(id));
+      return;
+
+    case GAME_TOKEN_CREATE:
+      mapAddToken(request['id'], createToken(jsonDecode(request['token'])));
       return;
   }
   print('Warning: unhandeled action');
