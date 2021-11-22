@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'dart:io';
+
 class Token {
   late int id;
   late String type;
@@ -77,8 +81,32 @@ Token tokenFromJson(Map token) {
 
 List<Token> allTokens = getTokens();
 
-List<Token> getTokens() {
-  List<Token> l = [];
+void addToken() {}
 
-  return l;
+void saveTokens() {
+  List<dynamic> st = [];
+  for (int i = 0; i < allTokens.length; i++) {
+    st.add(allTokens[i].toJson());
+  }
+  String s = jsonEncode(st);
+  File file = File('.data/token.json');
+  file.writeAsString(s);
+}
+
+List<Token> getTokens() {
+  List<Token> r = [];
+  List<dynamic> st = [];
+
+  File file = File('.data/token.json');
+  String s = file.readAsStringSync();
+  if (s.isNotEmpty) {
+    st = jsonDecode(s);
+  }
+
+  for (int i = 0; i < st.length; i++) {
+    Token u = tokenFromJson(st[i]);
+    r.add(u);
+  }
+
+  return r;
 }
