@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:living_map/accountmanager.dart';
+import 'package:living_map/token.dart';
 //import 'package:living_map/token.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -102,4 +103,30 @@ void getMapsForUser(String username, WebSocketChannel wsc) {
   }
 }
 
-void initMap(WebSocketChannel wsc, int id) {}
+MapImg? getMapById(int id) {
+  for (var element in allMaps) {
+    if (element.id == id) {
+      return element;
+    }
+  }
+  return null;
+}
+
+void mapAddToken(int map, int id) {
+  getMapById(map)!.tokens.add(id);
+}
+
+void initMap(WebSocketChannel wsc, int id) {
+  MapImg? checkMap = getMapById(id);
+  if (checkMap == null) {
+    print('Error: map with id: $id doesn\'t exist');
+    wsc.sink.add('error; msg: map with id: $id doesn\'exist');
+    return;
+  }
+  MapImg current = checkMap;
+  String src = current.src;
+  wsc.sink.add('map_initialize; src: $src');
+  for (var element in current.tokens) {
+    sendToken(getTokenById(element)!, wsc);
+  }
+}

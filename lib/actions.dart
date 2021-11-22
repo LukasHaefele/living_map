@@ -24,3 +24,8 @@ const MAP_GET_ALL = 'map_get_all';
 const MAP_ADD = 'map_add';
 const MAP_SELECT = 'map_select';
 const MAP_INITIALIZE = 'map_initialize';
+
+const ERROR = 'error';
+
+const GAME_TOKEN_CREATE = 'game_token_create';
+const GAME_TOKEN_ADD = 'game_token_add';

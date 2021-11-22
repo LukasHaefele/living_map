@@ -1,6 +1,7 @@
 import 'dart:convert';
-
 import 'dart:io';
+
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Token {
   late int id;
@@ -81,12 +82,33 @@ Token tokenFromJson(Map token) {
 
 List<Token> allTokens = getTokens();
 
-void addToken() {}
+int createToken(Map token, WebSocketChannel wsc) {
+  Token newToken = Token(
+      token['id'],
+      token['type'],
+      token['name'],
+      token['info'],
+      token['picture'],
+      token['pred'],
+      token['prey'],
+      token['wealth'],
+      token['wealthIncrease'],
+      token['strength'],
+      token['aggression'],
+      token['vendetta'],
+      token['intelligence'],
+      token['warState'],
+      token['position']);
+  allTokens.add(newToken);
+  saveTokens();
+  sendToken(newToken, wsc);
+  return token['id'];
+}
 
 void saveTokens() {
   List<dynamic> st = [];
-  for (int i = 0; i < allTokens.length; i++) {
-    st.add(allTokens[i].toJson());
+  for (var element in allTokens) {
+    st.add(element.toJson());
   }
   String s = jsonEncode(st);
   File file = File('.data/token.json');
@@ -94,19 +116,30 @@ void saveTokens() {
 }
 
 List<Token> getTokens() {
-  List<Token> r = [];
-  List<dynamic> st = [];
-
+  List<Token> to = [];
+  List<dynamic> us = [];
   File file = File('.data/token.json');
   String s = file.readAsStringSync();
   if (s.isNotEmpty) {
-    st = jsonDecode(s);
+    us = jsonDecode(s);
+  }
+  for (var element in us) {
+    to.add(tokenFromJson(element));
   }
 
-  for (int i = 0; i < st.length; i++) {
-    Token u = tokenFromJson(st[i]);
-    r.add(u);
-  }
+  return to;
+}
 
-  return r;
+Token? getTokenById(int id) {
+  for (var element in allTokens) {
+    if (element.id == id) {
+      return element;
+    }
+  }
+  return null;
+}
+
+void sendToken(Token t, WebSocketChannel wsc) {
+  String s = jsonEncode(t.toJson());
+  wsc.sink.add('game_token_add; token: $s');
 }
