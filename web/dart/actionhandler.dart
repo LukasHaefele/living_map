@@ -59,7 +59,7 @@ dynamic getaction(Map request, ClientWebSocket ws) {
       return;
 
     case MAP_INITIALIZE:
-      initMap(request['src']);
+      initMap(request['src'], ws);
       return;
 
     case GAME_TOKEN_ADD:

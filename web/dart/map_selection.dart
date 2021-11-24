@@ -74,7 +74,7 @@ ButtonElement getMapElement(
   ButtonElement newDiv = ButtonElement();
   String ts = DateTime.now().microsecondsSinceEpoch.toString();
   newDiv
-    ..classes.add('map')
+    ..classes.add('mapButton')
     ..id = 'name'
     ..style.backgroundImage = 'url($src?$ts)'
     ..text = name

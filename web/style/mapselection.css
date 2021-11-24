@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-.mapSelection .map {
+.mapSelection .mapButton {
   display: flex;
   height: 10%;
   width: 17%;
