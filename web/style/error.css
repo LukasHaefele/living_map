@@ -12,6 +12,7 @@
   margin-right: auto;
   border: 2px solid black;
   border-radius: 10px;
+  z-index: 5;
 }
 
 /*# sourceMappingURL=error.css.map */

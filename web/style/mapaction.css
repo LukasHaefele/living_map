@@ -7,13 +7,17 @@
 .board .mapBoard {
   width: 90%;
   height: 90%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 45px;
+  bottom: 0;
+  position: absolute;
+}
+.board .mapBoard #boardCanvas {
   border: 2px solid black;
   box-shadow: 2px 2px 10px;
-  margin: auto auto;
-}
-.board .mapBoard #mapBoardImg {
-  height: 100%;
-  width: 100%;
+  z-index: 2;
 }
 
 /*# sourceMappingURL=mapaction.css.map */

@@ -7,7 +7,7 @@ void initMap(String src, ClientWebSocket ws) {
     ?..innerHtml = ''
     ..style.display = 'none';
   querySelector('.board')?.style.display = 'flex';
-  ImageElement imE = querySelector('#mapBoardImg')! as ImageElement;
+  ImageElement imE = querySelector('#boardImg')! as ImageElement;
   imE.src = src;
 }
 
